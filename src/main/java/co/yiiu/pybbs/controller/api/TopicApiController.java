@@ -56,11 +56,11 @@ public class TopicApiController extends BaseApiController {
         // 查询话题有多少收藏
         List<Collect> collects = collectService.selectByTopicId(id);
         // 如果自己登录了，查询自己是否收藏过这个话题
-        User user = getApiUser(false);
-        if (user != null) {
-            Collect collect = collectService.selectByTopicIdAndUserId(id, user.getId());
-            map.put("collect", collect);
-        }
+        // User user = getApiUser(false);
+        // if (user != null) {
+        //     Collect collect = collectService.selectByTopicIdAndUserId(id, user.getId());
+        //     map.put("collect", collect);
+        // }
         // 话题浏览量+1
         String ip = IpUtil.getIpAddr(request);
         ip = ip.replace(":", "_").replace(".", "_");

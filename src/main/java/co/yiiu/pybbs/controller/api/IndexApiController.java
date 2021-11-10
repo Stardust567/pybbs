@@ -72,10 +72,10 @@ public class IndexApiController extends BaseApiController {
     public Result login(@RequestBody Map<String, String> body, HttpSession session) {
         String username = body.get("username");
         String password = body.get("password");
-        String captcha = body.get("captcha");
-        String _captcha = (String) session.getAttribute("_captcha");
-        ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
-        ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
+        // String captcha = body.get("captcha");
+        // String _captcha = (String) session.getAttribute("_captcha");
+        // ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
+        // ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
         ApiAssert.notEmpty(username, "请输入用户名");
         ApiAssert.notEmpty(password, "请输入密码");
         User user = userService.selectByUsername(username);
@@ -90,10 +90,10 @@ public class IndexApiController extends BaseApiController {
         String username = body.get("username");
         String password = body.get("password");
         String email = body.get("email");
-        String captcha = body.get("captcha");
-        String _captcha = (String) session.getAttribute("_captcha");
-        ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
-        ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
+        // String captcha = body.get("captcha");
+        // String _captcha = (String) session.getAttribute("_captcha");
+        // ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
+        // ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
         ApiAssert.notEmpty(username, "请输入用户名");
         ApiAssert.notEmpty(password, "请输入密码");
         ApiAssert.notEmpty(email, "请输入邮箱");
@@ -110,9 +110,9 @@ public class IndexApiController extends BaseApiController {
     // 发送手机验证码
     @GetMapping("/sms_code")
     public Result sms_code(String captcha, String mobile, HttpSession session) {
-        String _captcha = (String) session.getAttribute("_captcha");
-        ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
-        ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
+        // String _captcha = (String) session.getAttribute("_captcha");
+        // ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
+        // ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
         ApiAssert.notEmpty(mobile, "请输入手机号");
         ApiAssert.isTrue(StringUtil.check(mobile, StringUtil.MOBILEREGEX), "请输入正确的手机号");
         boolean b = codeService.sendSms(mobile);
@@ -128,10 +128,10 @@ public class IndexApiController extends BaseApiController {
     public Result mobile_login(@RequestBody Map<String, String> body, HttpSession session) {
         String mobile = body.get("mobile");
         String code = body.get("code");
-        String captcha = body.get("captcha");
-        String _captcha = (String) session.getAttribute("_captcha");
-        ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
-        ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
+        // String captcha = body.get("captcha");
+        // String _captcha = (String) session.getAttribute("_captcha");
+        // ApiAssert.notTrue(_captcha == null || StringUtils.isEmpty(captcha), "请输入验证码");
+        // ApiAssert.notTrue(!_captcha.equalsIgnoreCase(captcha), "验证码不正确");
         ApiAssert.notEmpty(mobile, "请输入手机号");
         ApiAssert.isTrue(StringUtil.check(mobile, StringUtil.MOBILEREGEX), "请输入正确的手机号");
         ApiAssert.notEmpty(code, "请输入手机验证码");
