@@ -175,6 +175,10 @@ public class IndexApiController extends BaseApiController {
     public Result tags(@RequestParam(defaultValue = "1") Integer pageNo) {
         return success(tagService.selectAll(pageNo, null, null));
     }
+    @GetMapping("/gc")
+    public void gc(){
+	        System.gc();
+    }
 
     // 上传图片
     @PostMapping("/upload")
