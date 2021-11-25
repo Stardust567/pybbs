@@ -35,15 +35,19 @@ public class CommentApiController extends BaseApiController {
     // 创建评论
     @PostMapping
     public Result create(@RequestBody Map<String, String> body) {
+	long startAt = System.nanoTime();
         User user = getApiUser();
+	long getUserAt = System.nanoTime();
         ApiAssert.isTrue(user.getActive(), "你的帐号还没有激活，请去个人设置页面激活帐号");
         String content = body.get("content");
         Integer topicId = StringUtils.isEmpty(body.get("topicId")) ? null : Integer.parseInt(body.get("topicId"));
         Integer commentId = StringUtils.isEmpty(body.get("commentId")) ? null : Integer.parseInt(body.get("commentId"));
         ApiAssert.notEmpty(content, "请输入评论内容");
         ApiAssert.notNull(topicId, "话题ID呢？");
+	long judgeParamsAt = System.nanoTime();
         Topic topic = topicService.selectById(topicId);
         ApiAssert.notNull(topic, "你晚了一步，话题可能已经被删除了");
+	long getTopicAt = System.nanoTime();
         // 组装comment对象
         Comment comment = new Comment();
         comment.setCommentId(commentId);
@@ -52,9 +56,13 @@ public class CommentApiController extends BaseApiController {
         comment.setInTime(new Date());
         comment.setTopicId(topic.getId());
         comment.setUserId(user.getId());
+	long setCommentAt = System.nanoTime();
         comment = commentService.insert(comment, topic, user);
+	long insertCommentAt = System.nanoTime();
         // 过滤评论内容
         comment.setContent(SensitiveWordUtil.replaceSensitiveWord(comment.getContent(), "*", SensitiveWordUtil.MinMatchType));
+	long filterCommentAt = System.nanoTime();
+	comment.setContent("getUser:%ld-judgeParam:%ld-getTopic:%ld-setComm:%ld-insertComm:%ld-filterComm:%ld", getUserAt-startAt, judgeParamsAt-getUserAt, getTopicAt-judgeParamsAt, setCommentAt-getTopicAt, insertCommentAt-setCommentAt, filterCommentAt-insertCommentAt);
         return success(comment);
     }
 

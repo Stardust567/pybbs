@@ -52,6 +52,11 @@ public class IndexApiController extends BaseApiController {
         return success(page);
     }
 
+    @GetMapping({"/ping"})
+    public Result ping() {
+	    return success("pong");
+    }
+
     // 根据标签名返回标签下话题
     @GetMapping("/tag/{name}")
     public Result topicsByTagName(@RequestParam(defaultValue = "1") Integer pageNo, @PathVariable String name) {
