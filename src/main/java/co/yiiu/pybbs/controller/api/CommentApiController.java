@@ -62,7 +62,7 @@ public class CommentApiController extends BaseApiController {
         // 过滤评论内容
         comment.setContent(SensitiveWordUtil.replaceSensitiveWord(comment.getContent(), "*", SensitiveWordUtil.MinMatchType));
 	long filterCommentAt = System.nanoTime();
-	comment.setContent("getUser:%ld-judgeParam:%ld-getTopic:%ld-setComm:%ld-insertComm:%ld-filterComm:%ld", getUserAt-startAt, judgeParamsAt-getUserAt, getTopicAt-judgeParamsAt, setCommentAt-getTopicAt, insertCommentAt-setCommentAt, filterCommentAt-insertCommentAt);
+	comment.setContent("getUser:"+(getUserAt-startAt)+"-judgeParam:"+(judgeParamsAt-getUserAt)+"-getTopic:"+(getTopicAt-judgeParamsAt)+"-setComm:"+(setCommentAt-getTopicAt)+"-insertComm:"+(insertCommentAt-setCommentAt)+"-filterComm:"+(filterCommentAt-insertCommentAt));
         return success(comment);
     }
 
